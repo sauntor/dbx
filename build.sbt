@@ -2,7 +2,7 @@ import scala.xml.transform.{RewriteRule, RuleTransformer}
 import scala.xml.{NodeSeq, Node => XmlNode, _}
 
 name := "dbx"
-ThisBuild / version := "2.1.0"
+ThisBuild / version := "2.1.1"
 ThisBuild / organization := "com.lingcreative"
 ThisBuild / organizationName := "LingCreative Studio"
 ThisBuild / scalaVersion := "2.12.8"
@@ -39,7 +39,7 @@ lazy val `dbx` = (project in file("."))
     `dbx-anorm`
   )
   .settings(
-    crossScalaVersions := Nil,
+//    crossScalaVersions := Nil,
     publish / skip := true
   )
 
