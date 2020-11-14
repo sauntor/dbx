@@ -105,7 +105,7 @@ object Transactional {
     private var _transactionStatus: TransactionStatus = null
     private var _oldTransactionInfo: Self = null
 
-    def newTransactionStatus(status: TransactionStatus) {
+    def newTransactionStatus(status: TransactionStatus) = {
       _transactionStatus = status
     }
 
@@ -118,14 +118,14 @@ object Transactional {
       */
     def hasTransaction: Boolean = _transactionStatus != null
 
-    def bindToThread() {
+    def bindToThread() = {
       // Expose current TransactionStatus, preserving any existing TransactionStatus
       // for restoration after this transaction is complete.
       _oldTransactionInfo = transactionInfoHolder.get
       transactionInfoHolder.set(this)
     }
 
-    def restoreThreadLocalStatus() {
+    def restoreThreadLocalStatus() = {
       // Use stack to restore old transaction TransactionInfo.
       // Will be null if none was set.
       transactionInfoHolder.set(_oldTransactionInfo)
@@ -336,7 +336,7 @@ trait Transactional[R] {
     *
     * @param txInfo information about the current transaction
     */
-  protected def commitTransactionAfterReturning(txInfo: TransactionInfo) {
+  protected def commitTransactionAfterReturning(txInfo: TransactionInfo) = {
     if (txInfo != null && txInfo.hasTransaction) {
       if (logger.isTraceEnabled) logger.trace("Completing transaction for [" + txInfo.joinpointIdentification + "]")
       txInfo.transactionManager.commit(txInfo.transactionStatus)
@@ -350,7 +350,7 @@ trait Transactional[R] {
     * @param txInfo information about the current transaction
     * @param ex     throwable encountered
     */
-  protected def completeTransactionAfterThrowing(txInfo: TransactionInfo, ex: Throwable) {
+  protected def completeTransactionAfterThrowing(txInfo: TransactionInfo, ex: Throwable) = {
     if (txInfo != null && txInfo.hasTransaction) {
       if (logger.isTraceEnabled) logger.trace("Completing transaction for [" + txInfo.joinpointIdentification + "] after exception: " + ex)
       if (txInfo.transactionAttribute.rollbackOn(ex)) try
@@ -400,7 +400,7 @@ trait Transactional[R] {
     *
     * @param txInfo information about the current transaction (may be { @code null})
     */
-  protected def cleanupTransactionInfo(txInfo: TransactionInfo) {
+  protected def cleanupTransactionInfo(txInfo: TransactionInfo) = {
     if (txInfo != null) txInfo.restoreThreadLocalStatus()
 //    resourceNameHolder.remove()
 //    resourceOperationHolder.remove()
