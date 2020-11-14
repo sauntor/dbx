@@ -2,14 +2,13 @@ import scala.xml.transform.{RewriteRule, RuleTransformer}
 import scala.xml.{NodeSeq, Node => XmlNode, _}
 
 name := "dbx"
-ThisBuild / version := "2.1.1"
+ThisBuild / version := "2.1.2"
 ThisBuild / organization := "com.lingcreative"
 ThisBuild / organizationName := "LingCreative Studio"
-ThisBuild / scalaVersion := "2.12.8"
-ThisBuild / crossScalaVersions := Seq("2.11.8", "2.12.8")
+ThisBuild / scalaVersion := "2.13.3"
+ThisBuild / crossScalaVersions := Seq("2.11.8", "2.12.8", "2.13.3")
 
 ThisBuild / scalacOptions ++= Seq(
-  "-target:jvm-1.8",
   "-feature",
   "-deprecation",
   "-unchecked",
@@ -155,11 +154,11 @@ lazy val `dbx-core` = (project in file("dbx-core"))
 
 lazy val `dbx-anorm` = (project in file("dbx-anorm"))
   .settings(
-    publishArtifact in Test := false,
-    libraryDependencies += "org.playframework.anorm" %% "anorm" % "2.6.2",
+    libraryDependencies += "org.playframework.anorm" %% "anorm" % "2.6.4",
     libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.2.3" % Test,
     libraryDependencies += "com.googlecode.log4jdbc" % "log4jdbc" % "1.2" % Test,
-    libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.8" % Test,
-    libraryDependencies += "com.h2database" % "h2" % "1.4.199" % Test
+    libraryDependencies += "org.scalatest" %% "scalatest" % "3.0.9" % Test,
+    libraryDependencies += "com.h2database" % "h2" % "1.4.199" % Test,
+    publishArtifact in Test := false
   )
 
